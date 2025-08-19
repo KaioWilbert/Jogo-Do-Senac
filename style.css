@@ -1,0 +1,144 @@
+body {
+  margin: 0;
+  font-family: 'Comic Sans MS', sans-serif;
+  background-image: url('../img/jpeg.jfif');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: #fff;
+  overflow: hidden; /* Evita scroll */
+}
+
+#scoreboard {
+  font-size: 1.5rem;
+  background-color: rgba(0,0,0,0.5);
+  padding: 10px;
+  border-radius: 10px;
+  position: fixed; /* fixo no topo mesmo com scroll */
+  top: 10px;
+  left: 10px;
+  display: none;
+  z-index: 100; /* garantir sobreposição */
+}
+
+#gameCanvas {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  overflow: hidden; /* evitar itens ultrapassarem */
+}
+
+.item {
+  position: absolute;
+  font-size: 3rem;
+  pointer-events: none;
+  user-select: none;
+  transition: top 0.02s linear; /* suaviza a queda */
+}
+
+#lixeira {
+  position: fixed;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 3rem;
+  width: 60px;
+  height: 60px;
+  background: #fff;
+  color: #000;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+  box-shadow: 0 0 15px #000;
+  user-select: none;
+  cursor: grab; /* indicativo de que pode mover */
+}
+
+#lixeira:active {
+  cursor: grabbing;
+}
+
+#message {
+  position: fixed; /* fixed para garantir estar sempre visível */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 3rem;
+  background-color: rgba(0,0,0,0.7);
+  padding: 20px 40px;
+  border-radius: 15px;
+  display: none;
+  z-index: 200;
+  user-select: none;
+  text-align: center;
+  max-width: 80vw;
+}
+
+#sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 60px; /* largura mínima para pegar o mouse */
+  background-color: rgba(0, 0, 0, 0.7);
+  padding-top: 60px;
+  overflow-x: hidden;
+  transition: width 0.3s ease;
+  z-index: 90;
+  cursor: pointer;
+}
+
+/* Expande ao passar o mouse */
+#sidebar:hover {
+  width: 220px;
+  overflow-x: visible;
+}
+
+/* Lista e links */
+#sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#sidebar ul li {
+  margin: 10px 0;
+}
+
+/* Link padrão - alinhar itens em linha */
+#sidebar ul li a {
+  display: flex;
+  align-items: center;
+  color: white;
+  text-decoration: none;
+  font-size: 1.2rem;
+  padding: 10px 15px;
+  white-space: nowrap;
+  transition: all 0.3s ease;
+}
+
+/* O emoji sempre aparece */
+#sidebar ul li a .icon {
+  font-size: 1.8rem;
+  width: 30px;
+  min-width: 30px;
+  text-align: center;
+  margin-right: 10px;
+}
+
+/* Texto fica invisível na barra minimizada */
+#sidebar:not(:hover) ul li a .text {
+  opacity: 0;
+  width: 0;
+  overflow: hidden;
+  transition: opacity 0.3s ease, width 0.3s ease;
+}
+
+/* Texto aparece no hover */
+#sidebar:hover ul li a .text {
+  opacity: 1;
+  width: auto;
+  margin-left: 5px;
+}
